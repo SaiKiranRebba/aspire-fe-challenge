@@ -5,9 +5,10 @@ import Account from "@/assets/Account.svg";
 import Card from "@/assets/Card.svg";
 import Payments from "@/assets/Payments.svg";
 import Credit from "@/assets/Credit.svg";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
+const route = useRoute();
 
 const toolbarItems = [
   { icon: Home, label: "Home", path: "/home" },
@@ -42,6 +43,7 @@ function onClickMenuItem(item: Record<string, any>) {
         v-for="(item, index) in toolbarItems"
         :key="index"
         @click="onClickMenuItem(item)"
+        :class="{ active: route.path === item.path }"
       >
         <q-img
           :src="item.icon"
@@ -76,6 +78,9 @@ function onClickMenuItem(item: Record<string, any>) {
       display: flex;
       align-items: center;
       margin-bottom: 60px;
+      &.active {
+        color: #01d167;
+      }
       &_img {
       }
       &_title {
